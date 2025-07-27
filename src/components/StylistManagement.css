@@ -1,0 +1,48 @@
+.stylist-management {
+    padding: 20px;
+    background: linear-gradient(to bottom right, #ffdd00aa, #0033ffaa);
+    text-align: center;
+    min-height: 60vh;
+    margin-top: 50px;
+}
+
+.stylist-management h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.stylist-management form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stylist-management form input {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.stylist-management form button {
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.stylist-management ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.stylist-management ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.stylist-management ul li button {
+    padding: 5px;
+    cursor: pointer;
+}

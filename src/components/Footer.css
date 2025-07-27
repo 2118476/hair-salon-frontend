@@ -1,0 +1,21 @@
+/* src/components/Footer.css */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.social-media-links a {
+    margin: 0 10px;
+}
+
+.social-media-links img {
+    height: 40px;  /* Adjust size as needed */
+    width: auto;
+    vertical-align: middle;
+}
+
+.social-media-links a:hover {
+    opacity: 0.8; /* Optional: style for hover effect */
+}

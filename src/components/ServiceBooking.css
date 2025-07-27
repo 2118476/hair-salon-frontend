@@ -1,0 +1,83 @@
+/* ServiceBooking.css */
+.service-booking-container {
+    padding: 20px;
+    background: linear-gradient(to bottom right, #6a82fb, #630480); /* Stylish gradient background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 40px auto;
+    max-width: 600px;
+    color: #7e12eb;
+    text-align: center;
+}
+
+.service-booking-container h2 {
+    color: #ffde00;
+    margin-bottom: 20px;
+}
+
+.service-booking-container label {
+    display: block;
+    margin-bottom: 15px;
+    color: #ffffffb3;
+    font-size: 1.1em;
+}
+
+.service-booking-container select,
+.service-booking-container input,
+.service-booking-container textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #060c4265;
+    background-color: #ffffff;
+    color: #010006;
+}
+
+.service-booking-container button {
+    width: auto;
+    padding: 10px 20px;
+    background-color: #ff8c00;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.service-booking-container button:hover {
+    background-color: #ffd700;
+    transform: scale(1.05);
+}
+
+.service-booking-container .error-message {
+    background-color: #4a1b1bd6;
+    color: #087937;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.service-booking-container .available-slots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.service-booking-container .slot-button {
+    background: #4caf50;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.service-booking-container .slot-button.selected {
+    background: #ffde00;
+}
+
+.service-booking-container .slot-button:hover {
+    background-color: #45a049;
+}

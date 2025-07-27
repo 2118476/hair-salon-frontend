@@ -1,0 +1,44 @@
+/* Moderator.css */
+.moderator-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.moderator-header {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size: 24px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;  /* Adds space below the header */
+}
+
+.management-module {
+    margin: 0; /* Removes margin for full width */
+    padding: 15px;
+    background: #f9f9f9;
+    border: 10px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensures the module fills the full width of the container */
+}
+
+.management-module h3 {
+    color: #333;
+    font-size: 20px;
+}
+
+@media (min-width: 768px) {
+    .management-module {
+        display: grid;
+        grid-template-columns: 1fr; /* Adjusted to make sure it fills full width */
+        gap: 20px;
+    }
+}

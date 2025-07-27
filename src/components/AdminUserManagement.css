@@ -1,0 +1,82 @@
+/* src/components/AdminUserManagement.css */
+
+.admin-user-management {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+.admin-user-management h1 {
+    text-align: center;
+    font-size: 64px;
+    font-weight: 500;
+    color: #05703e;
+    margin-bottom: 20px;
+}
+
+.admin-user-management ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-user-management li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.admin-user-management li:hover {
+    background-color: #f7f7f7;
+}
+
+.admin-user-management button {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
+}
+
+.admin-user-management button:hover {
+    background-color: #005bb5;
+    transform: translateY(-2px);
+}
+
+.admin-user-management button:active {
+    background-color: #05294d;
+    transform: translateY(0);
+}
+
+.admin-user-management .error {
+    color: #e63946;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .admin-user-management {
+        padding: 20px;
+    }
+
+    .admin-user-management li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-user-management button {
+        margin-top: 10px;
+    }
+}

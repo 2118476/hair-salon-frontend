@@ -1,0 +1,33 @@
+.header-container {
+    background-color: #333; /* Dark background for contrast */
+    color: white;
+    padding: 20px 30px; /* Sufficient padding */
+    display: flex;
+    justify-content: space-between; /* Space out nav items */
+    align-items: center; /* Center items vertically */
+    font-size: 1rem;
+}
+
+.header-container a {
+    color: white; /* Ensures readability */
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px; /* Rounded corners for aesthetics */
+}
+
+.header-container a:hover, .header-container a.active {
+    background-color: #575757; /* Subtle hover effect */
+    transition: background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; /* Stack items under each other on small screens */
+        padding: 20px;
+    }
+
+    .header-container a {
+        margin-bottom: 10px; /* Add space between stacked links */
+    }
+}
