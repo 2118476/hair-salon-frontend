@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# Hair Salon Booking System — Frontend (Professional V2)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive React frontend for a premium London hair salon booking platform. Built with React 18, TypeScript, Vite, Tailwind CSS, and TanStack Query.
 
-## Available Scripts
+## Tech Stack
 
-In the project directory, you can run:
+- **Framework**: React 18.3 + TypeScript (strict)
+- **Build Tool**: Vite 5
+- **Routing**: React Router v6
+- **State Management**: TanStack Query (React Query) + React Context
+- **Styling**: Tailwind CSS v3
+- **Forms**: React Hook Form + Zod
+- **Icons**: Lucide React
+- **HTTP**: Axios with JWT interceptors
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Customer Experience
+- 🏠 **Landing Page** — Hero section, featured services & stylists
+- 💇 **Services Catalog** — Browse services with category filters
+- 👩‍🎨 **Stylist Directory** — Profile cards with specializations
+- 📅 **4-Step Booking Flow** — Service → Stylist → Date/Time → Confirm
+- 👤 **Customer Dashboard** — Upcoming bookings, history, profile
+- 🔐 **Auth** — Registration, login, password reset
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Admin Dashboard
+- 📊 **Statistics** — Total bookings, users, services, stylists
+- 📋 **Booking Management** — View, reschedule, cancel all appointments
+- 👥 **User Management** — Role assignment (USER → MODERATOR → ADMIN)
+- 💼 **Service Management** — CRUD for salon services
+- 👩‍🎨 **Stylist Management** — CRUD for staff profiles
 
-### `npm test`
+### Design System
+- 🎨 Warm, premium colour palette (deep navy + warm gold)
+- 📱 Fully responsive (mobile-first)
+- ♿ Accessible (ARIA labels, keyboard navigation, focus states)
+- ⏳ Skeleton loaders & empty states
+- 🔔 Toast notifications
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pages & Routes
 
-### `npm run build`
+| Route | Page | Access |
+|-------|------|--------|
+| `/` | Home | Public |
+| `/services` | Services | Public |
+| `/stylists` | Stylists | Public |
+| `/booking` | Booking Flow | Authenticated |
+| `/login` | Login | Public |
+| `/register` | Register | Public |
+| `/forgot-password` | Forgot Password | Public |
+| `/reset-password` | Reset Password | Public |
+| `/dashboard` | Customer Dashboard | USER |
+| `/admin` | Admin Dashboard | ADMIN, MODERATOR |
+| `*` | 404 Not Found | Public |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Local Development
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+- Node.js 20+
+- Backend API running (see backend README)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Setup
 
-### `npm run eject`
+```bash
+# Install dependencies
+npm install
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Create environment file
+cp .env.example .env
+# Edit .env: VITE_API_URL=http://localhost:8080
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Start dev server
+npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The dev server will start at `http://localhost:5173`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Build for Production
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Output goes to `dist/`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Preview Production Build
 
-### Code Splitting
+```bash
+npm run preview
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Environment Variables
 
-### Analyzing the Bundle Size
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_API_URL` | `http://localhost:8080` | Backend API base URL (no trailing slash) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Project Structure
 
-### Making a Progressive Web App
+```
+src/
+├── api/           — Axios client & API functions
+├── components/    — Reusable UI components
+│   ├── admin/     — Dashboard management panels
+│   ├── auth/      — Login, register, password forms
+│   ├── booking/   — Booking flow step components
+│   ├── customer/  — Dashboard booking lists
+│   ├── layout/    — Navbar, footer, page layout
+│   └── ui/        — Primitive components (Button, Input, Card, etc.)
+├── context/       — AuthContext provider
+├── hooks/         — Custom React hooks
+├── pages/         — Route-level page components
+├── types/         — TypeScript interfaces
+└── utils/         — Formatters & validators
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## API Integration
 
-### Advanced Configuration
+All API calls use `/api/v1` prefix:
+- `GET /api/v1/services` — List services
+- `POST /api/v1/auth/login` — Login
+- `GET /api/v1/bookings/available-slots` — Fetch time slots
+- etc.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The Axios client automatically:
+- Attaches `Authorization: Bearer <token>` header
+- Redirects to `/login` on 401 responses
+- Prefixes all requests with `VITE_API_URL`
 
-### Deployment
+## Authentication Flow
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. User logs in → backend returns JWT token + user info
+2. Token stored in `localStorage`
+3. `AuthContext` restores session on app load
+4. Axios interceptor adds token to every request
+5. On 401 → clear storage, redirect to login
 
-### `npm run build` fails to minify
+## Role-Based Access
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Role | Redirect After Login | Accessible Routes |
+|------|---------------------|-------------------|
+| USER | `/dashboard` | `/`, `/services`, `/stylists`, `/booking`, `/dashboard` |
+| MODERATOR | `/admin` | All + `/admin` |
+| ADMIN | `/admin` | All + `/admin` |
+
+## Responsive Breakpoints
+
+- **Mobile**: < 640px (single column, hamburger nav)
+- **Tablet**: 640px – 1024px (2-column grids)
+- **Desktop**: > 1024px (full layout)
+
+## Build Output
+
+```
+dist/
+├── index.html
+├── assets/
+│   ├── index-*.js    (~429 KB, 125 KB gzipped)
+│   └── index-*.css   (~24 KB, 5 KB gzipped)
+```
+
+## License
+
+MIT
