@@ -1,5 +1,5 @@
 import { apiClient } from './client';
-import { ApiResponse, Booking, TimeSlot } from '../types';
+import { Booking, TimeSlot } from '../types';
 
 interface CreateBookingData {
   stylistId: string;
@@ -9,35 +9,45 @@ interface CreateBookingData {
   notes?: string;
 }
 
+interface AvailabilityResponse {
+  availableSlots: string[]; // "HH:mm:ss"
+}
+
 export const bookingsApi = {
   getMyBookings: async (): Promise<Booking[]> => {
-    const response = await apiClient.get<ApiResponse<Booking[]>>('/bookings/my-bookings');
-    return response.data.data;
+    const { data } = await apiClient.get<Booking[]>('/bookings/my-bookings');
+    return data;
   },
 
+  // Admin/moderator paged list — returns the page content.
   getAll: async (): Promise<Booking[]> => {
-    const response = await apiClient.get<ApiResponse<Booking[]>>('/bookings');
-    return response.data.data;
+    const { data } = await apiClient.get<{ content: Booking[] }>('/bookings?page=0&size=100');
+    return data.content ?? [];
   },
 
   getAvailableSlots: async (stylistId: string, serviceId: string, date: string): Promise<TimeSlot[]> => {
-    const response = await apiClient.get<ApiResponse<TimeSlot[]>>(
+    const { data } = await apiClient.get<AvailabilityResponse>(
       `/bookings/available-slots?stylistId=${stylistId}&serviceId=${serviceId}&date=${date}`
     );
-    return response.data.data;
+    return (data.availableSlots ?? []).map((t) => ({ time: t.slice(0, 5), available: true }));
   },
 
-  create: async (data: CreateBookingData): Promise<Booking> => {
-    const response = await apiClient.post<ApiResponse<Booking>>('/bookings', data);
-    return response.data.data;
+  create: async (body: CreateBookingData): Promise<Booking> => {
+    const { data } = await apiClient.post<Booking>('/bookings', body);
+    return data;
   },
 
-  updateStatus: async (id: string, status: string): Promise<Booking> => {
-    const response = await apiClient.patch<ApiResponse<Booking>>(`/bookings/${id}/status`, { status });
-    return response.data.data;
+  reschedule: async (id: string, body: CreateBookingData): Promise<Booking> => {
+    const { data } = await apiClient.put<Booking>(`/bookings/${id}`, body);
+    return data;
   },
 
   cancel: async (id: string): Promise<void> => {
-    await apiClient.patch<ApiResponse<void>>(`/bookings/${id}/cancel`);
+    await apiClient.delete(`/bookings/${id}`);
+  },
+
+  createPaymentIntent: async (bookingId: string): Promise<{ paymentId: string; clientSecret: string; amountPence: number; currency: string; type: string }> => {
+    const { data } = await apiClient.post(`/bookings/${bookingId}/payment-intent`);
+    return data;
   },
 };

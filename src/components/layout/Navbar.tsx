@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useState } from 'react';
-import { Scissors, Menu, X, User, LogOut, LayoutDashboard, Calendar } from 'lucide-react';
+import { Scissors, Menu, X, User, LogOut, LayoutDashboard, Calendar, Building2 } from 'lucide-react';
 
 export function Navbar() {
   const { user, isAuthenticated, isAdmin, isModerator, logout } = useAuth();
@@ -14,10 +14,13 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-2 text-xl font-bold text-primary">
           <Scissors className="h-6 w-6 text-accent" />
-          <span className="hidden sm:inline">London Hair</span>
+          <span className="hidden font-serif sm:inline">Lumière</span>
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
+          <Link to="/discover" className="text-sm font-medium text-text-primary hover:text-accent">
+            Discover
+          </Link>
           <Link to="/services" className="text-sm font-medium text-text-primary hover:text-accent">
             Services
           </Link>
@@ -52,6 +55,12 @@ export function Navbar() {
                     className="flex w-full items-center gap-2 px-4 py-2 text-sm text-text-primary hover:bg-gray-50"
                   >
                     <Calendar className="h-4 w-4" /> My Bookings
+                  </button>
+                  <button
+                    onClick={() => { navigate('/business'); setProfileOpen(false); }}
+                    className="flex w-full items-center gap-2 px-4 py-2 text-sm text-text-primary hover:bg-gray-50"
+                  >
+                    <Building2 className="h-4 w-4" /> My Salon
                   </button>
                   <button
                     onClick={() => { logout(); setProfileOpen(false); }}
@@ -89,6 +98,9 @@ export function Navbar() {
       {mobileOpen && (
         <div className="border-t border-gray-200 px-4 py-4 md:hidden">
           <div className="flex flex-col gap-3">
+            <Link to="/discover" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-text-primary">
+              Discover
+            </Link>
             <Link to="/services" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-text-primary">
               Services
             </Link>
@@ -102,6 +114,9 @@ export function Navbar() {
               <>
                 <Link to="/dashboard" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-text-primary">
                   My Bookings
+                </Link>
+                <Link to="/business" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-text-primary">
+                  My Salon
                 </Link>
                 {(isAdmin || isModerator) && (
                   <Link to="/admin" onClick={() => setMobileOpen(false)} className="text-sm font-medium text-text-primary">

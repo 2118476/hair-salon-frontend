@@ -78,3 +78,80 @@ export interface TimeSlot {
   time: string;
   available: boolean;
 }
+
+// ---- Platform (multi-business) ----
+
+export interface BusinessSummary {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  businessType?: string;
+  londonArea?: string;
+  logoUrl?: string;
+  coverImageUrl?: string;
+  instantBooking: boolean;
+  verified: boolean;
+  myRole?: string;
+}
+
+export interface Location {
+  id: string;
+  businessId: string;
+  name: string;
+  addressLine1?: string;
+  city?: string;
+  postcode?: string;
+  londonArea?: string;
+  phone?: string;
+}
+
+export interface Business extends BusinessSummary {
+  email?: string;
+  phone?: string;
+  website?: string;
+  timezone?: string;
+  languages?: string;
+  hijabFriendly: boolean;
+  homeService: boolean;
+  mobileService: boolean;
+  childrenAccepted: boolean;
+  privateTreatmentRoom: boolean;
+  consultationRequired: boolean;
+  minBookingNoticeMinutes: number;
+  cancellationNoticeHours: number;
+  depositType: string;
+  depositValue: number;
+  currency: string;
+  locations: Location[];
+}
+
+export interface Membership {
+  id: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  active: boolean;
+}
+
+export interface Review {
+  id: string;
+  businessId: string;
+  bookingId: string;
+  reviewerName: string;
+  rating: number;
+  comment?: string;
+  businessResponse?: string;
+  status: string;
+  createdAt: string;
+}
+
+export interface Page<T> {
+  content: T[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+}

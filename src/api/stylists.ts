@@ -1,33 +1,36 @@
 import { apiClient } from './client';
-import { ApiResponse, Stylist } from '../types';
+import { Stylist } from '../types';
 
 export const stylistsApi = {
   getAll: async (): Promise<Stylist[]> => {
-    const response = await apiClient.get<ApiResponse<Stylist[]>>('/stylists');
-    return response.data.data;
+    const { data } = await apiClient.get<Stylist[]>('/stylists');
+    return data;
   },
 
   getById: async (id: string): Promise<Stylist> => {
-    const response = await apiClient.get<ApiResponse<Stylist>>(`/stylists/${id}`);
-    return response.data.data;
+    const { data } = await apiClient.get<Stylist>(`/stylists/${id}`);
+    return data;
   },
 
-  getByService: async (serviceId: string): Promise<Stylist[]> => {
-    const response = await apiClient.get<ApiResponse<Stylist[]>>(`/stylists?serviceId=${serviceId}`);
-    return response.data.data;
+  // The public list endpoint returns all active stylists; filtering by service is
+  // done client-side where needed.
+  getByService: async (_serviceId: string): Promise<Stylist[]> => {
+    const { data } = await apiClient.get<Stylist[]>('/stylists');
+    return data;
   },
 
-  create: async (data: Omit<Stylist, 'id'>): Promise<Stylist> => {
-    const response = await apiClient.post<ApiResponse<Stylist>>('/stylists', data);
-    return response.data.data;
+  // Legacy single-salon admin (platform ADMIN/MODERATOR)
+  create: async (body: Omit<Stylist, 'id'>): Promise<Stylist> => {
+    const { data } = await apiClient.post<Stylist>('/stylists', body);
+    return data;
   },
 
-  update: async (id: string, data: Partial<Stylist>): Promise<Stylist> => {
-    const response = await apiClient.put<ApiResponse<Stylist>>(`/stylists/${id}`, data);
-    return response.data.data;
+  update: async (id: string, body: Partial<Stylist>): Promise<Stylist> => {
+    const { data } = await apiClient.put<Stylist>(`/stylists/${id}`, body);
+    return data;
   },
 
   delete: async (id: string): Promise<void> => {
-    await apiClient.delete<ApiResponse<void>>(`/stylists/${id}`);
+    await apiClient.delete(`/stylists/${id}`);
   },
 };

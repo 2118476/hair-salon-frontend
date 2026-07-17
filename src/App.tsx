@@ -5,6 +5,10 @@ import { HomePage } from './pages/HomePage';
 import { ServicesPage } from './pages/ServicesPage';
 import { StylistPage } from './pages/StylistPage';
 import { BookingPage } from './pages/BookingPage';
+import { DiscoverPage } from './pages/DiscoverPage';
+import { SalonProfilePage } from './pages/SalonProfilePage';
+import { BusinessOnboardingPage } from './pages/BusinessOnboardingPage';
+import { MyBusinessesPage } from './pages/MyBusinessesPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
@@ -52,9 +56,14 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HomePage />} />
+        <Route path="/discover" element={<DiscoverPage />} />
+        <Route path="/salons/:id" element={<SalonProfilePage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/stylists" element={<StylistPage />} />
         <Route path="/booking" element={<BookingPage />} />
+
+        <Route path="/business" element={<ProtectedRoute><MyBusinessesPage /></ProtectedRoute>} />
+        <Route path="/business/new" element={<ProtectedRoute><BusinessOnboardingPage /></ProtectedRoute>} />
 
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />

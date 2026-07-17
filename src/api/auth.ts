@@ -1,32 +1,48 @@
 import { apiClient } from './client';
-import { ApiResponse, LoginCredentials, RegisterData, User } from '../types';
+import { LoginCredentials, RegisterData, User } from '../types';
 
 interface AuthResponse {
   token: string;
   user: User;
 }
 
+// The backend returns flat DTOs (no { data } envelope); these functions adapt them
+// to the shapes the app uses.
 export const authApi = {
   login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
-    const response = await apiClient.post<ApiResponse<AuthResponse>>('/auth/login', credentials);
-    return response.data.data;
+    const { data } = await apiClient.post('/auth/login', credentials);
+    return {
+      token: data.token,
+      user: {
+        id: data.userId,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        role: data.role,
+      },
+    };
   },
 
-  register: async (data: RegisterData): Promise<AuthResponse> => {
-    const response = await apiClient.post<ApiResponse<AuthResponse>>('/auth/register', data);
-    return response.data.data;
+  register: async (data: RegisterData): Promise<void> => {
+    await apiClient.post('/auth/register', {
+      email: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+    });
   },
 
   forgotPassword: async (email: string): Promise<void> => {
-    await apiClient.post<ApiResponse<void>>('/auth/forgot-password', { email });
+    await apiClient.post('/auth/forgot-password', { email });
   },
 
   resetPassword: async (token: string, password: string): Promise<void> => {
-    await apiClient.post<ApiResponse<void>>(`/auth/reset-password?token=${token}`, { password });
+    await apiClient.post('/auth/reset-password', { token, newPassword: password });
   },
 
   getCurrentUser: async (): Promise<User> => {
-    const response = await apiClient.get<ApiResponse<User>>('/auth/me');
-    return response.data.data;
+    const { data } = await apiClient.get<User>('/auth/me');
+    return data;
   },
 };

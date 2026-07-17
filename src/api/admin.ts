@@ -1,46 +1,56 @@
 import { apiClient } from './client';
-import { AdminStats, ApiResponse, Booking, User, Service, Stylist } from '../types';
+import { AdminStats, Booking, User, Service, Stylist } from '../types';
+
+interface StatusHistory {
+  id: string;
+  status: string;
+  changedAt: string;
+  changedByName?: string;
+  reason?: string;
+}
 
 export const adminApi = {
   getStats: async (): Promise<AdminStats> => {
-    const response = await apiClient.get<ApiResponse<AdminStats>>('/admin/stats');
-    return response.data.data;
+    const { data } = await apiClient.get<AdminStats>('/admin/stats');
+    return data;
   },
 
   getUpcomingAppointments: async (): Promise<Booking[]> => {
-    const response = await apiClient.get<ApiResponse<Booking[]>>('/admin/upcoming-appointments');
-    return response.data.data;
+    const { data } = await apiClient.get<Booking[]>('/admin/upcoming-appointments');
+    return data;
   },
 
   getRecentActivity: async (): Promise<{ id: string; description: string; timestamp: string }[]> => {
-    const response = await apiClient.get<ApiResponse<{ id: string; description: string; timestamp: string }[]>>(
-      '/admin/recent-activity'
-    );
-    return response.data.data;
+    const { data } = await apiClient.get<StatusHistory[]>('/admin/recent-activity');
+    return data.map((h) => ({
+      id: h.id,
+      description: `${h.changedByName ?? 'System'} set status to ${h.status}${h.reason ? ` — ${h.reason}` : ''}`,
+      timestamp: h.changedAt,
+    }));
   },
 
   getAllUsers: async (): Promise<User[]> => {
-    const response = await apiClient.get<ApiResponse<User[]>>('/admin/users');
-    return response.data.data;
+    const { data } = await apiClient.get<{ content: User[] }>('/users?page=0&size=100');
+    return data.content ?? [];
   },
 
   updateUserRole: async (userId: string, role: string): Promise<User> => {
-    const response = await apiClient.patch<ApiResponse<User>>(`/admin/users/${userId}/role`, { role });
-    return response.data.data;
+    const { data } = await apiClient.put<User>(`/users/${userId}/role`, { role });
+    return data;
   },
 
   getAllBookings: async (): Promise<Booking[]> => {
-    const response = await apiClient.get<ApiResponse<Booking[]>>('/admin/bookings');
-    return response.data.data;
+    const { data } = await apiClient.get<{ content: Booking[] }>('/bookings?page=0&size=100');
+    return data.content ?? [];
   },
 
   getAllServices: async (): Promise<Service[]> => {
-    const response = await apiClient.get<ApiResponse<Service[]>>('/admin/services');
-    return response.data.data;
+    const { data } = await apiClient.get<Service[]>('/services');
+    return data;
   },
 
   getAllStylists: async (): Promise<Stylist[]> => {
-    const response = await apiClient.get<ApiResponse<Stylist[]>>('/admin/stylists');
-    return response.data.data;
+    const { data } = await apiClient.get<Stylist[]>('/stylists');
+    return data;
   },
 };
