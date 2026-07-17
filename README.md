@@ -31,7 +31,8 @@ A modern, responsive React frontend for a premium London hair salon booking plat
 - 👩‍🎨 **Stylist Management** — CRUD for staff profiles
 
 ### Design System
-- 🎨 Warm, premium colour palette (deep navy + warm gold)
+- 🎨 Premium London palette — ink black, warm ivory, bronze, deep burgundy, muted sage (Tailwind tokens) with an editorial serif (Fraunces) for headings
+- 🔌 API client aligned to the backend contract (raw DTOs, correct endpoints, flat login mapping)
 - 📱 Fully responsive (mobile-first)
 - ♿ Accessible (ARIA labels, keyboard navigation, focus states)
 - ⏳ Skeleton loaders & empty states
@@ -42,9 +43,13 @@ A modern, responsive React frontend for a premium London hair salon booking plat
 | Route | Page | Access |
 |-------|------|--------|
 | `/` | Home | Public |
+| `/discover` | Discover salons (search) | Public |
+| `/salons/:id` | Salon profile (services, reviews, policies) | Public |
 | `/services` | Services | Public |
 | `/stylists` | Stylists | Public |
 | `/booking` | Booking Flow | Authenticated |
+| `/business` | My businesses | Authenticated |
+| `/business/new` | Onboard a business | Authenticated |
 | `/login` | Login | Public |
 | `/register` | Register | Public |
 | `/forgot-password` | Forgot Password | Public |
