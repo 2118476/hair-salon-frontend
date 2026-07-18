@@ -50,6 +50,8 @@ A modern, responsive React frontend for a premium London hair salon booking plat
 | `/booking` | Booking Flow | Authenticated |
 | `/business` | My businesses | Authenticated |
 | `/business/new` | Onboard a business | Authenticated |
+| `/business/:businessId/*` | **Business dashboard** — overview, calendar, services, staff, schedules, locations, customers, waitlist, reviews, portfolio, payments, reports, settings | Business members |
+| `/platform` | Platform administration | ADMIN, MODERATOR |
 | `/login` | Login | Public |
 | `/register` | Register | Public |
 | `/forgot-password` | Forgot Password | Public |
@@ -57,6 +59,14 @@ A modern, responsive React frontend for a premium London hair salon booking plat
 | `/dashboard` | Customer Dashboard | USER |
 | `/admin` | Admin Dashboard | ADMIN, MODERATOR |
 | `*` | 404 Not Found | Public |
+
+## Testing
+
+- **Unit / component**: Vitest + React Testing Library — `npm run test` (validators, UI components, API contract).
+- **End-to-end**: Playwright — `npx playwright install chromium` then `npm run e2e` against a running stack (frontend on :3000 + backend + DB).
+- **Lint / build**: `npm run lint` (0 warnings) and `npm run build` (tsc + vite).
+
+The business dashboard connects every screen to a real backend endpoint (see `src/api/businessAdmin.ts`).
 
 ## Local Development
 
