@@ -79,6 +79,125 @@ export interface TimeSlot {
   available: boolean;
 }
 
+export type AppointmentStatus =
+  | 'PENDING' | 'CONFIRMED' | 'CHECKED_IN' | 'IN_PROGRESS'
+  | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW';
+
+export interface Appointment {
+  id: string;
+  userId: string;
+  customerName?: string;
+  businessId?: string;
+  stylistId: string;
+  stylistName: string;
+  serviceId: string;
+  serviceName: string;
+  appointmentDate: string;
+  startTime: string;
+  endTime: string;
+  status: AppointmentStatus;
+  channel?: string;
+  notes?: string;
+  totalPricePence: number;
+  createdAt: string;
+}
+
+export interface Invitation {
+  id: string;
+  businessId: string;
+  email: string;
+  role: string;
+  status: string;
+  expiresAt: string;
+  createdAt: string;
+  acceptToken?: string;
+  acceptUrl?: string;
+}
+
+export interface CustomerSummary {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  totalVisits: number;
+  completed: number;
+  cancellations: number;
+  noShows: number;
+  totalSpendPence: number;
+  marketingConsent: boolean;
+}
+
+export interface CustomerDetail {
+  summary: CustomerSummary;
+  upcoming: Appointment[];
+  history: Appointment[];
+  note?: string;
+}
+
+export interface Payment {
+  id: string;
+  bookingId?: string;
+  type: string;
+  amountPence: number;
+  currency: string;
+  status: string;
+  createdAt: string;
+}
+
+export interface TimeOff {
+  id: string;
+  stylistId: string;
+  startDate: string;
+  endDate: string;
+  startTime?: string;
+  endTime?: string;
+  reason?: string;
+}
+
+export interface ReportSummary {
+  from: string;
+  to: string;
+  totalBookings: number;
+  completed: number;
+  cancelled: number;
+  noShows: number;
+  revenuePence: number;
+  refundsPence: number;
+  averageAppointmentValuePence: number;
+  noShowRate: number;
+  cancellationRate: number;
+  topServices: { name: string; count: number }[];
+}
+
+export interface WaitlistEntry {
+  id: string;
+  businessId: string;
+  serviceId?: string;
+  stylistId?: string;
+  status: string;
+  preferredDateFrom?: string;
+  preferredDateTo?: string;
+  offeredSlotStart?: string;
+  offerExpiresAt?: string;
+  createdAt: string;
+}
+
+export interface PortfolioImage {
+  id: string;
+  businessId: string;
+  stylistId?: string;
+  serviceId?: string;
+  url: string;
+  caption?: string;
+  contentType?: string;
+  sizeBytes?: number;
+  consentGiven: boolean;
+  sortOrder: number;
+  archived: boolean;
+  createdAt: string;
+}
+
 // ---- Platform (multi-business) ----
 
 export interface BusinessSummary {

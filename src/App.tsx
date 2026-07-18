@@ -9,6 +9,20 @@ import { DiscoverPage } from './pages/DiscoverPage';
 import { SalonProfilePage } from './pages/SalonProfilePage';
 import { BusinessOnboardingPage } from './pages/BusinessOnboardingPage';
 import { MyBusinessesPage } from './pages/MyBusinessesPage';
+import { DashboardLayout } from './components/business/DashboardLayout';
+import { OverviewPage } from './pages/business/OverviewPage';
+import { CalendarPage } from './pages/business/CalendarPage';
+import { ServicesPage as BizServicesPage } from './pages/business/ServicesPage';
+import { StaffPage } from './pages/business/StaffPage';
+import { SchedulesPage } from './pages/business/SchedulesPage';
+import { LocationsPage } from './pages/business/LocationsPage';
+import { CustomersPage } from './pages/business/CustomersPage';
+import { WaitlistPage } from './pages/business/WaitlistPage';
+import { ReviewsPage } from './pages/business/ReviewsPage';
+import { PortfolioPage } from './pages/business/PortfolioPage';
+import { PaymentsPage } from './pages/business/PaymentsPage';
+import { ReportsPage } from './pages/business/ReportsPage';
+import { SettingsPage } from './pages/business/SettingsPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
@@ -64,6 +78,22 @@ export default function App() {
 
         <Route path="/business" element={<ProtectedRoute><MyBusinessesPage /></ProtectedRoute>} />
         <Route path="/business/new" element={<ProtectedRoute><BusinessOnboardingPage /></ProtectedRoute>} />
+
+        <Route path="/business/:businessId" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+          <Route index element={<OverviewPage />} />
+          <Route path="calendar" element={<CalendarPage />} />
+          <Route path="services" element={<BizServicesPage />} />
+          <Route path="staff" element={<StaffPage />} />
+          <Route path="schedules" element={<SchedulesPage />} />
+          <Route path="locations" element={<LocationsPage />} />
+          <Route path="customers" element={<CustomersPage />} />
+          <Route path="waitlist" element={<WaitlistPage />} />
+          <Route path="reviews" element={<ReviewsPage />} />
+          <Route path="portfolio" element={<PortfolioPage />} />
+          <Route path="payments" element={<PaymentsPage />} />
+          <Route path="reports" element={<ReportsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
 
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />

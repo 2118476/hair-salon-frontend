@@ -44,9 +44,14 @@ export function MyBusinessesPage() {
                 <span className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-ink">{b.myRole}</span>
               </div>
               {b.londonArea && <p className="mt-1 text-sm text-text-secondary">{b.londonArea}</p>}
-              <Link to={`/salons/${b.id}`} className="mt-4 inline-block">
-                <Button variant="outline" size="sm">View public profile</Button>
-              </Link>
+              <div className="mt-4 flex gap-2">
+                <Link to={`/business/${b.id}`}>
+                  <Button size="sm">Manage</Button>
+                </Link>
+                <Link to={`/salons/${b.id}`}>
+                  <Button variant="outline" size="sm">Public profile</Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
         ))}
