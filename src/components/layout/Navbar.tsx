@@ -43,12 +43,20 @@ export function Navbar() {
               {profileOpen && (
                 <div className="absolute right-0 mt-2 w-48 rounded-md border border-gray-200 bg-surface py-1 shadow-lg">
                   {(isAdmin || isModerator) && (
-                    <button
-                      onClick={() => { navigate('/admin'); setProfileOpen(false); }}
-                      className="flex w-full items-center gap-2 px-4 py-2 text-sm text-text-primary hover:bg-gray-50"
-                    >
-                      <LayoutDashboard className="h-4 w-4" /> Admin
-                    </button>
+                    <>
+                      <button
+                        onClick={() => { navigate('/admin'); setProfileOpen(false); }}
+                        className="flex w-full items-center gap-2 px-4 py-2 text-sm text-text-primary hover:bg-gray-50"
+                      >
+                        <LayoutDashboard className="h-4 w-4" /> Admin
+                      </button>
+                      <button
+                        onClick={() => { navigate('/platform'); setProfileOpen(false); }}
+                        className="flex w-full items-center gap-2 px-4 py-2 text-sm text-text-primary hover:bg-gray-50"
+                      >
+                        <LayoutDashboard className="h-4 w-4" /> Platform
+                      </button>
+                    </>
                   )}
                   <button
                     onClick={() => { navigate('/dashboard'); setProfileOpen(false); }}

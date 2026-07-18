@@ -29,6 +29,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { AdminPage } from './pages/AdminPage';
+import { PlatformAdminPage } from './pages/PlatformAdminPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 function ProtectedRoute({ children, adminOnly = false }: { children: React.ReactNode; adminOnly?: boolean }) {
@@ -102,6 +103,7 @@ export default function App() {
 
         <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute adminOnly><AdminPage /></ProtectedRoute>} />
+        <Route path="/platform" element={<ProtectedRoute adminOnly><PlatformAdminPage /></ProtectedRoute>} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
